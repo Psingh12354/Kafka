@@ -1,29 +1,34 @@
-# Apache Kafka
+# Apache Kafka — Beginner Friendly End-to-End Notes
+
+> Imagine you want to send messages (like WhatsApp) but not between people, instead between **apps and systems**. Kafka is like a **post office** for data — apps drop letters (messages), Kafka stores and routes them safely, and other apps pick them up when they want.
+
+This guide explains Kafka in **simple, beginner-friendly language** with examples and comparisons.
+
+---
 
 ## Table of Contents
 
 1. What is Kafka (Simple Explanation)
 2. Why Do We Need Kafka?
-3. Why Use Kafka? (Benefits)
-4. How Kafka Works (Simple Diagram)
-5. Core Concepts (Explained with Analogies)
-6. Kafka Architecture (Post Office Example)
-7. Producers & Consumers (Senders & Receivers)
-8. Topics, Partitions & Offsets (Mailboxes)
+3. Why Use Kafka?
+4. Core Concepts (Explained with Analogies)
+5. Kafka Architecture (Post Office Example)
+6. Producers & Consumers (Senders & Receivers)
+7. Topics, Partitions & Offsets (Mailboxes)
+8. Events vs Tasks
 9. How Kafka Handles Failures (Replication)
 10. Message Delivery (At-most, At-least, Exactly Once)
 11. How Data is Stored (Serialization & Schema)
 12. Kafka Streams & Kafka Connect (Processing & Moving Data)
-13. **Events vs Tasks** (New Section)
-14. Security Basics (Locks & Keys)
-15. Monitoring (How to Check Health)
-16. Performance Tips (Simple Rules)
-17. Setting up Kafka Locally with Docker
-18. Code Examples (Java & Python)
-19. Ecosystem (Friends of Kafka)
-20. Dependent Topics (ZooKeeper vs KRaft)
-21. Best Practices for Beginners
-22. References
+13. Security Basics (Locks & Keys)
+14. Monitoring (How to Check Health)
+15. Performance Tips (Simple Rules)
+16. Setting up Kafka Locally with Docker
+17. Code Examples (Java & Python)
+18. Ecosystem (Friends of Kafka)
+19. Dependent Topics (ZooKeeper vs KRaft)
+20. Best Practices for Beginners
+21. References
 
 ---
 
@@ -42,7 +47,7 @@ Kafka is a **software tool** that helps applications talk to each other using me
 * Another app (billing) picks it up to generate an invoice.
 * Another app (shipping) picks it up to arrange delivery.
 
-![What is Kafka](https://miro.medium.com/v2/resize\:fit:1100/format\:webp/1*t2CUZ9Azl3Jk9P7ivd7C5Q.png)
+![What is Kafka](https://github.com/Psingh12354/Kafka/blob/main/how-kafka-works.png)
 
 ---
 
@@ -55,42 +60,24 @@ With Kafka, apps just drop messages into a mailbox. Any number of apps can read 
 * **Without Kafka** → each app talks to all other apps.
 * **With Kafka** → all apps talk only to Kafka.
 
-![Why Kafka](https://miro.medium.com/v2/resize\:fit:1100/format\:webp/1*oU7pN4dLzN-Zg-7o2d6vHg.png)
+---
+
+## 3. Why Use Kafka?
+
+* **Real-time**: Processes data instantly (e.g., fraud detection).
+* **Scalable**: Handles millions of events per second.
+* **Reliable**: Doesn’t lose data (replication).
+* **Flexible**: Connects with many databases and systems.
+
+📊 Example Use Cases:
+
+* Banking: Fraud detection.
+* E-commerce: Order tracking, recommendation systems.
+* Social Media: News feeds.
 
 ---
 
-## 3. Why Use Kafka? (Benefits)
-
-* **High speed** 🚀 — Can handle millions of messages per second.
-* **Durable** 💾 — Messages are stored on disk, so they don’t get lost.
-* **Scalable** 📈 — Add more servers easily when traffic increases.
-* **Fault-tolerant** 🔄 — Keeps copies of data, so even if one server fails, nothing is lost.
-* **Flexible** 🔌 — Many apps can read the same data.
-* **Real-time** ⏱️ — Data flows continuously with very low delay.
-
-📦 **Example Benefits:**
-
-* Netflix uses Kafka to track what people are watching (to recommend shows).
-* Uber uses Kafka to match drivers and riders in real-time.
-* Banks use Kafka to process payments instantly.
-
-![Kafka Benefits](https://miro.medium.com/v2/resize\:fit:1100/format\:webp/1*4wGcKZ9VwRIFGB-YlW4pRQ.png)
-
----
-
-## 4. How Kafka Works (Simple Diagram)
-
-Here’s a **step-by-step visual** of how Kafka works:
-
-![How Kafka Works](../mnt/data/A_2D_digital_illustration_diagram_titled_"How_Kafk.png)
-
-* **Producer**: sends data (like letters to a mailbox).
-* **Kafka Cluster**: stores data in partitions (drawers inside mailbox).
-* **Consumer**: picks up data when needed.
-
----
-
-## 5. Core Concepts
+## 4. Core Concepts
 
 * **Broker** → Kafka server (post office branch).
 * **Topic** → A named mailbox (e.g., `orders`, `payments`).
@@ -100,13 +87,11 @@ Here’s a **step-by-step visual** of how Kafka works:
 * **Consumer** → Reader of messages.
 * **Consumer Group** → A team of readers sharing work.
 
-![Kafka Concepts](https://kafka.apache.org/24/images/kafka-apis.png)
-
 ---
 
-## 6. Kafka Architecture (Post Office Example)
+## 5. Kafka Architecture (Post Office Example)
 
-![Kafka Architecture](https://miro.medium.com/v2/resize\:fit:720/format\:webp/1*7COyRjA0kB1D9vlxQ51Tpw.png)
+![Kafka Architecture](https://github.com/Psingh12354/Kafka/blob/main/kafka-architecture.png)
 
 * Producers put letters in the post office.
 * Kafka (post office) keeps letters safe.
@@ -115,7 +100,9 @@ Here’s a **step-by-step visual** of how Kafka works:
 
 ---
 
-## 7. Producers & Consumers
+## 6. Producers & Consumers
+
+![Producer Consumer](https://github.com/Psingh12354/Kafka/blob/main/producer-consumer.png)
 
 ### Producer (Sender)
 
@@ -129,11 +116,11 @@ Here’s a **step-by-step visual** of how Kafka works:
 
 📦 Example: Payment service sends `payment done`. Shipping service reads it.
 
-![Producer and Consumer](https://kafka.apache.org/24/images/kafka-consumer-groups.png)
-
 ---
 
-## 8. Topics, Partitions & Offsets
+## 7. Topics, Partitions & Offsets
+
+![Topics Partitions](https://github.com/Psingh12354/Kafka/blob/main/topics-partitions.png)
 
 * **Topic** → Like a mailbox (`orders`).
 * **Partitions** → Like dividing the mailbox into drawers. Each drawer has messages in order.
@@ -141,18 +128,32 @@ Here’s a **step-by-step visual** of how Kafka works:
 
 📝 Example: Partition 0 has messages \[Order1, Order2], Partition 1 has \[Order3, Order4].
 
-![Partitions](https://miro.medium.com/v2/resize\:fit:720/format\:webp/1*_l0KJeqtdz9vEtXGOBnVxA.png)
+---
+
+## 8. Events vs Tasks
+
+![Events vs Tasks](https://github.com/Psingh12354/Kafka/blob/main/event-vs-task.png)
+
+* **Event** → Something that **happened** (like *“User placed an order”*).
+* **Task** → Something that **needs to be done** (like *“Ship the order”*).
+
+📦 Example:
+
+* Event: *Order Created* (captured by Kafka).
+* Task: *Send confirmation email* (done by a consumer service after reading the event).
+
+👉 Kafka mainly deals with **events**, and different apps decide what **tasks** to do after consuming those events.
 
 ---
 
 ## 9. How Kafka Handles Failures
 
+![Replication](https://github.com/Psingh12354/Kafka/blob/main/replication.png)
+
 Kafka makes **copies** (replicas) of every drawer (partition).
 
 * If one broker (server) fails, another copy is used.
 * Typical: 3 copies of each partition.
-
-![Replication](https://miro.medium.com/v2/resize\:fit:720/format\:webp/1*sE0pL02Af2c4xDPu5rYF2Q.png)
 
 ---
 
@@ -161,8 +162,6 @@ Kafka makes **copies** (replicas) of every drawer (partition).
 * **At-most-once** → Send once, may be lost, never repeated.
 * **At-least-once** → Guaranteed delivered, but could be duplicate.
 * **Exactly-once** → Guaranteed delivered and no duplicates (hardest, but Kafka supports it).
-
-![Delivery](https://miro.medium.com/v2/resize\:fit:720/format\:webp/1*X5xGZoKcX4m9JZZXx9UmHw.png)
 
 ---
 
@@ -179,35 +178,9 @@ Kafka makes **copies** (replicas) of every drawer (partition).
 * **Kafka Streams**: A library to process data while it flows. Example: count how many orders per minute.
 * **Kafka Connect**: Ready-made connectors to move data between Kafka and databases, cloud storage, etc.
 
-![Streams and Connect](https://miro.medium.com/v2/resize\:fit:720/format\:webp/1*nSaPqcg8skZpMWxVtQ8wAw.png)
-
 ---
 
-## 13. Events vs Tasks
-
-A lot of beginners get confused between **events** and **tasks**. Let’s clear it up:
-
-* **Event** → Something that already happened.
-
-  * Example: *“User placed an order.”*
-* **Task** → Something that needs to be done as a result of that event.
-
-  * Example: *“Send confirmation email”* or *“Ship the order.”*
-
-📦 Example Flow:
-
-1. Event: *Order Created* → sent to Kafka.
-2. Consumer A (Billing) → Task: *Generate invoice*.
-3. Consumer B (Email Service) → Task: *Send confirmation email*.
-4. Consumer C (Shipping Service) → Task: *Arrange delivery*.
-
-👉 Kafka mainly stores and shares **events**. Consumers decide which **tasks** to perform.
-
-![Event vs Task](https://miro.medium.com/v2/resize\:fit:720/format\:webp/1*L_RK0rCHzM6N9Vhmc6V7pg.png)
-
----
-
-## 14. Security Basics
+## 13. Security Basics
 
 * **SSL/TLS**: Locking communication.
 * **SASL**: Username/password to access.
@@ -215,7 +188,7 @@ A lot of beginners get confused between **events** and **tasks**. Let’s clear 
 
 ---
 
-## 15. Monitoring
+## 14. Monitoring
 
 Things to watch:
 
@@ -225,7 +198,7 @@ Things to watch:
 
 ---
 
-## 16. Performance Tips
+## 15. Performance Tips
 
 * More partitions → more parallelism.
 * Use compression (snappy/gzip) to save space.
@@ -233,7 +206,7 @@ Things to watch:
 
 ---
 
-## 17. Local Setup with Docker
+## 16. Local Setup with Docker
 
 ```yaml
 version: '3.8'
@@ -269,7 +242,7 @@ kafka-console-consumer --topic orders --from-beginning --bootstrap-server localh
 
 ---
 
-## 18. Code Examples
+## 17. Code Examples
 
 ### Java Producer
 
@@ -303,7 +276,7 @@ while True:
 
 ---
 
-## 19. Ecosystem
+## 18. Ecosystem
 
 * **Schema Registry** → define message format.
 * **Kafka Connect** → move data in/out.
@@ -312,7 +285,7 @@ while True:
 
 ---
 
-## 20. Dependent Topics
+## 19. Dependent Topics
 
 * **ZooKeeper vs KRaft**: Old Kafka needed ZooKeeper. Newer Kafka uses KRaft (built-in system). Easier setup.
 * **JVM**: Kafka runs on Java. Needs memory tuning.
@@ -320,7 +293,7 @@ while True:
 
 ---
 
-## 21. Best Practices
+## 20. Best Practices
 
 * Always set replication factor ≥ 3.
 * Don’t make too many partitions (start small).
@@ -330,7 +303,7 @@ while True:
 
 ---
 
-## 22. References
+## 21. References
 
 * [Apache Kafka Official Docs](https://kafka.apache.org)
 * [Confluent Kafka Documentation](https://docs.confluent.io)
