@@ -47,7 +47,7 @@ Kafka is a **software tool** that helps applications talk to each other using me
 * Another app (billing) picks it up to generate an invoice.
 * Another app (shipping) picks it up to arrange delivery.
 
-![What is Kafka](https://github.com/Psingh12354/Kafka/blob/main/how-kafka-works.png)
+![What is Kafka](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4LJ9X4W3j-iOihP1nlRaivF8qGj6jSCzFKw&s)
 
 ---
 
@@ -59,6 +59,8 @@ With Kafka, apps just drop messages into a mailbox. Any number of apps can read 
 
 * **Without Kafka** → each app talks to all other apps.
 * **With Kafka** → all apps talk only to Kafka.
+
+![Why Kafka](https://www.instaclustr.com/wp-content/uploads/2021/10/image1-2.png)
 
 ---
 
@@ -87,11 +89,13 @@ With Kafka, apps just drop messages into a mailbox. Any number of apps can read 
 * **Consumer** → Reader of messages.
 * **Consumer Group** → A team of readers sharing work.
 
+![Kafka Concepts](https://kafka.apache.org/images/log_anatomy.png)
+
 ---
 
 ## 5. Kafka Architecture (Post Office Example)
 
-![Kafka Architecture](https://github.com/Psingh12354/Kafka/blob/main/kafka-architecture.png)
+![Kafka Architecture](https://miro.medium.com/1%2AqH6bx8wESbc4IyrGWIZdkg.png)
 
 * Producers put letters in the post office.
 * Kafka (post office) keeps letters safe.
@@ -102,7 +106,7 @@ With Kafka, apps just drop messages into a mailbox. Any number of apps can read 
 
 ## 6. Producers & Consumers
 
-![Producer Consumer](https://github.com/Psingh12354/Kafka/blob/main/producer-consumer.png)
+![Producer Consumer](https://kafka.apache.org/images/producer_consumer.png)
 
 ### Producer (Sender)
 
@@ -120,7 +124,7 @@ With Kafka, apps just drop messages into a mailbox. Any number of apps can read 
 
 ## 7. Topics, Partitions & Offsets
 
-![Topics Partitions](https://github.com/Psingh12354/Kafka/blob/main/topics-partitions.png)
+![Topics Partitions](https://media.geeksforgeeks.org/wp-content/uploads/20240604175624/Kafka-Architecture-01-01.webp)
 
 * **Topic** → Like a mailbox (`orders`).
 * **Partitions** → Like dividing the mailbox into drawers. Each drawer has messages in order.
@@ -131,8 +135,6 @@ With Kafka, apps just drop messages into a mailbox. Any number of apps can read 
 ---
 
 ## 8. Events vs Tasks
-
-![Events vs Tasks](https://github.com/Psingh12354/Kafka/blob/main/event-vs-task.png)
 
 * **Event** → Something that **happened** (like *“User placed an order”*).
 * **Task** → Something that **needs to be done** (like *“Ship the order”*).
@@ -147,8 +149,6 @@ With Kafka, apps just drop messages into a mailbox. Any number of apps can read 
 ---
 
 ## 9. How Kafka Handles Failures
-
-![Replication](https://github.com/Psingh12354/Kafka/blob/main/replication.png)
 
 Kafka makes **copies** (replicas) of every drawer (partition).
 
@@ -177,6 +177,8 @@ Kafka makes **copies** (replicas) of every drawer (partition).
 
 * **Kafka Streams**: A library to process data while it flows. Example: count how many orders per minute.
 * **Kafka Connect**: Ready-made connectors to move data between Kafka and databases, cloud storage, etc.
+
+![Kafka Streams](https://docs.confluent.io/platform/current/_images/streams-interactive-queries-01.png)
 
 ---
 
@@ -310,5 +312,3 @@ while True:
 * *Kafka: The Definitive Guide* (Book)
 
 ---
-
-✨ With this, even if you’ve **never heard of Kafka before**, you now know it’s basically a **smart, fault-tolerant post office for data** where apps can send and receive messages safely.
